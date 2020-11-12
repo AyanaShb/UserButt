@@ -42,14 +42,18 @@ async def _(event):
     user_bio = replied_user.about
     if user_bio is not None:
         user_bio = replied_user.about
+    await event.edit("`Processing...`")
     await event.client(UpdateProfileRequest(first_name=first_name, last_name=last_name))
+    await event.client(UpdateProfileRequest(about=user_bio))
+    await propic.client(UploadProfilePhotoRequest(await event.client.upload_file(profile_pic)))
+    os.remove(profile_pic)
+    await event.edit("Cloned Successfully")
     ##functions.account.UpdateProfileRequest(last_name=last_name)
     #functions.account.UpdateProfileRequest(about=user_bio)
     #pfile = event.client.upload_file(profile_pic)  # pylint:disable=E060
     #functions.photos.UploadProfilePhotoRequest(pfile)  # pylint:disable=E0602
-    await event.edit("Cloned Successfully")
-    #event.delete()
-    #event.client.send_message(event.chat_id, "Cloned Successfully", reply_to=reply_message)
+    event.delete()
+    event.client.send_message(event.chat_id, "Cloned Successfully", reply_to=reply_message)
 
 #@telebot.on(admin_cmd(pattern="revert$"))
 @register(outgoing=True, pattern="^.revert$")
