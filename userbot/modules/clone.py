@@ -49,14 +49,9 @@ async def _(event):
     await event.client(UploadProfilePhotoRequest(await event.client.upload_file(profile_pic)))
     os.remove(profile_pic)
     await event.edit("Cloned Successfully")
-    ##functions.account.UpdateProfileRequest(last_name=last_name)
-    #functions.account.UpdateProfileRequest(about=user_bio)
-    #pfile = event.client.upload_file(profile_pic)  # pylint:disable=E060
-    #functions.photos.UploadProfilePhotoRequest(pfile)  # pylint:disable=E0602
     event.delete()
     event.client.send_message(event.chat_id, "Cloned Successfully", reply_to=reply_message)
 
-#@telebot.on(admin_cmd(pattern="revert$"))
 @register(outgoing=True, pattern="^.revert$")
 async def _(event):
     if event.fwd_from:
@@ -70,13 +65,9 @@ async def _(event):
     for sep in pfplist.photos:
         input_photos.append(InputPhoto(id=sep.id,access_hash=sep.access_hash,file_reference=sep.file_reference))
     await event.client(DeletePhotosRequest(id=input_photos))
-    #await event.client(DeletePhotosRequest(event.client.get_profile_photos("me", limit=n)))
-    await event.client(UpdateProfileRequest(first_name=name))
+    await event.client(UpdateProfileRequest(first_name=name, last_name=""))
     await event.client(UpdateProfileRequest(about=bio))
-    #functions.photos.DeletePhotosRequest(event.client.get_profile_photos("me", limit=n))
-    #functions.account.UpdateProfileRequest(about=bio)
-    #functions.account.UpdateProfileRequest(first_name=name)
-    event.edit("succesfully reverted to your account back")
+    await event.edit("`succesfully reverted my account back`")
 
 
 async def get_full_user(event):
