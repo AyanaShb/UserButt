@@ -4,6 +4,7 @@ Syntax: .clone @username"""
 # Credits of Plugin @ViperAdnan and @mrconfused(revert)[will add sql soon]
 
 import html
+import os
 
 from telethon.tl import functions
 from telethon.tl.functions.account import (UpdateProfileRequest,UpdateUsernameRequest)
@@ -63,9 +64,13 @@ async def _(event):
     name = f"{DEFAULTUSER}"
     bio = f"{DEFAULTUSERBIO}"
     n = 1
-    functions.photos.DeletePhotosRequest(event.client.get_profile_photos("me", limit=n))
-    functions.account.UpdateProfileRequest(about=bio)
-    functions.account.UpdateProfileRequest(first_name=name)
+    await event.edit("`Processing...`")
+    await event.client(DeletePhotosRequest(event.client.get_profile_photos("me", limit=n))
+    await event.client(UpdateProfileRequest(first_name=name)
+    await event.client(UpdateProfileRequest(about=bio))
+    #functions.photos.DeletePhotosRequest(event.client.get_profile_photos("me", limit=n))
+    #functions.account.UpdateProfileRequest(about=bio)
+    #functions.account.UpdateProfileRequest(first_name=name)
     event.edit("succesfully reverted to your account back")
 
 
