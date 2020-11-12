@@ -22,7 +22,7 @@ async def help(event):
             msg = await event.edit("Please specify a valid module name.")
     else:
         numb = 1
-        string = "Specify which module do you want help for !!\n**Usage:** `.help` <module name>\n\n"
+        string = "**Usage:** `.help` <module name>\n\n"
         for i in sorted(CMD_HELP):
             string += numb + "• " + str(i) + "\n"
             numb = numb + 1
