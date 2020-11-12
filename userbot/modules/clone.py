@@ -9,7 +9,7 @@ from telethon.tl import functions
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
-from userbot import ALIVE_NAME, CMD_HELP, DEFAULT_BIO
+from userbot import ALIVE_NAME, CMD_HELP, DEFAULT_BIO, TEMP_DOWNLOAD_DIRECTORY
 #from ..utils import admin_cmd
 from userbot.events import register
 
@@ -34,7 +34,7 @@ async def _(event):
         return False
     user_id = replied_user.user.id
     profile_pic = await event.client.download_profile_photo(
-        user_id, Config.TMP_DOWNLOAD_DIRECTORY
+        user_id, TEMP_DOWNLOAD_DIRECTORY
     )
     # some people have weird HTML in their names
     first_name = html.escape(replied_user.user.first_name)
