@@ -9,9 +9,9 @@
     "modular",
     "productivity"
   ],
-  "repository": "https://github.com/keselekpermen69/userbutt",
+  "repository": "https://github.com/AyanaShb/userbutt",
   "website": "https://telegra.ph/How-to-host-a-Telegram-Userbot-11-02",
-  "success_url": "https://t.me/userbotindo",
+  "success_url": "https://t.me/uzasyz",
   "stack": "container",
   "env": {
     "API_KEY": {
@@ -41,7 +41,7 @@
     },
     "UPSTREAM_REPO_URL": {
       "description": "In case you maintain a fork, add your repo URL here.",
-      "value": "https://github.com/KeselekPermen69/UserButt",
+      "value": "https://github.com/AyanaShb/UserButt",
       "required": false
     },
     "COUNTRY": {
