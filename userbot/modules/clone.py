@@ -55,17 +55,13 @@ async def _(event):
     user_bio = replied_user.about
     if user_bio is not None:
         user_bio = replied_user.about
-    await borg(functions.account.UpdateProfileRequest(first_name=first_name))
-    await borg(functions.account.UpdateProfileRequest(last_name=last_name))
-    await borg(functions.account.UpdateProfileRequest(about=user_bio))
+    await functions.account.UpdateProfileRequest(first_name=first_name)
+    await functions.account.UpdateProfileRequest(last_name=last_name)
+    await functions.account.UpdateProfileRequest(about=user_bio)
     pfile = await borg.upload_file(profile_pic)  # pylint:disable=E060
-    await borg(
-        functions.photos.UploadProfilePhotoRequest(pfile)  # pylint:disable=E0602
-    )
+    await functions.photos.UploadProfilePhotoRequest(pfile)  # pylint:disable=E0602
     await event.delete()
-    await borg.send_message(
-        event.chat_id, "Cloned Successfully", reply_to=reply_message
-    )
+    await borg.send_message(event.chat_id, "Cloned Successfully", reply_to=reply_message)
 
 #@telebot.on(admin_cmd(pattern="revert$"))
 @register(outgoing=True, pattern="^.revert$")
