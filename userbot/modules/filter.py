@@ -26,6 +26,7 @@ async def filter_incoming_handler(handler):
             if not filters:
                 return
             for trigger in filters:
+                print(trigger)
                 pattern = (
                     r"( |^|[^\w])" + escape(trigger.keyword) + r"( |$|[^\w])")
                 pro = search(pattern, name, flags=IGNORECASE)
