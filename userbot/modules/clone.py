@@ -6,23 +6,17 @@ Syntax: .clone @username"""
 import html
 
 from telethon.tl import functions
+from telethon.tl.functions.account import (UpdateProfileRequest,UpdateUsernameRequest)
 from telethon.tl.functions.users import GetFullUserRequest
-from telethon.tl.types import MessageEntityMentionName
+from telethon.tl.functions.photos import (DeletePhotosRequest,GetUserPhotosRequest,UploadProfilePhotoRequest)
+from telethon.tl.types import MessageEntityMentionName,InputPhoto, MessageMediaPhoto, User, Chat
 
 from userbot import ALIVE_NAME, CMD_HELP, DEFAULT_BIO, TEMP_DOWNLOAD_DIRECTORY
-#from ..utils import admin_cmd
 from userbot.events import register
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot"
 DEFAULTUSERBIO = str(DEFAULT_BIO) if DEFAULT_BIO else "404: No bio found!˙"
-#if Config.PRIVATE_GROUP_BOT_API_ID is None:
-#    BOTLOG = False
-#else:
-#    BOTLOG = True
-#    BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
 
-
-#@telebot.on(admin_cmd(pattern="clone ?(.*)"))
 @register(outgoing=True, pattern="^.clone(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
@@ -36,32 +30,26 @@ async def _(event):
     profile_pic = await event.client.download_profile_photo(
         user_id, TEMP_DOWNLOAD_DIRECTORY
     )
-    # some people have weird HTML in their names
     first_name = html.escape(replied_user.user.first_name)
-    # https://stackoverflow.com/a/5072031/4723940
-    # some Deleted Accounts do not have first_name
     if first_name is not None:
-        # some weird people (like me) have more than 4096 characters in their
-        # names
         first_name = first_name.replace("\u2060", "")
     last_name = replied_user.user.last_name
-    # last_name is not Manadatory in @Telegram
     if last_name is not None:
         last_name = html.escape(last_name)
         last_name = last_name.replace("\u2060", "")
     if last_name is None:
         last_name = "⁪⁬⁮⁮⁮"
-    # inspired by https://telegram.dog/afsaI181
     user_bio = replied_user.about
     if user_bio is not None:
         user_bio = replied_user.about
-    functions.account.UpdateProfileRequest(first_name=first_name)
-    functions.account.UpdateProfileRequest(last_name=last_name)
-    functions.account.UpdateProfileRequest(about=user_bio)
-    pfile = event.client.upload_file(profile_pic)  # pylint:disable=E060
-    functions.photos.UploadProfilePhotoRequest(pfile)  # pylint:disable=E0602
-    event.delete()
-    event.client.send_message(event.chat_id, "Cloned Successfully", reply_to=reply_message)
+    await event.client(UpdateProfileRequest(first_name=first_name, last_name=last_name))
+    ##functions.account.UpdateProfileRequest(last_name=last_name)
+    #functions.account.UpdateProfileRequest(about=user_bio)
+    #pfile = event.client.upload_file(profile_pic)  # pylint:disable=E060
+    #functions.photos.UploadProfilePhotoRequest(pfile)  # pylint:disable=E0602
+    await event.edit("Cloned Successfully")
+    #event.delete()
+    #event.client.send_message(event.chat_id, "Cloned Successfully", reply_to=reply_message)
 
 #@telebot.on(admin_cmd(pattern="revert$"))
 @register(outgoing=True, pattern="^.revert$")
