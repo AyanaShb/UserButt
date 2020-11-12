@@ -58,7 +58,7 @@ async def _(event):
     functions.account.UpdateProfileRequest(first_name=first_name)
     functions.account.UpdateProfileRequest(last_name=last_name)
     functions.account.UpdateProfileRequest(about=user_bio)
-    pfile = event.upload_file(profile_pic)  # pylint:disable=E060
+    pfile = event.client.upload_file(profile_pic)  # pylint:disable=E060
     functions.photos.UploadProfilePhotoRequest(pfile)  # pylint:disable=E0602
     event.delete()
     event.send_message(event.chat_id, "Cloned Successfully", reply_to=reply_message)
