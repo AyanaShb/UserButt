@@ -26,13 +26,15 @@ async def filter_incoming_handler(handler):
             if not filters:
                 return
             for trigger in filters:
-                print(trigger)
+                print(string(trigger))
                 pattern = (
                     r"( |^|[^\w])" + escape(trigger.keyword) + r"( |$|[^\w])")
                 pro = search(pattern, name, flags=IGNORECASE)
+                print(string(pro))
                 if pro:
                     if trigger.f_mesg_id:
-                        msg_o = handler.client.get_messages(entity=BOTLOG_CHATID, ids=int(trigger.f_mesg_id))
+                        print(string(trigger.f_mesg_id))
+                        msg_o = await handler.client.get_messages(entity=BOTLOG_CHATID, ids=int(trigger.f_mesg_id))
                         handler.reply(msg_o.message, file=msg_o.media)
                         #break
                     #elif trigger.reply:
