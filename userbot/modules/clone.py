@@ -55,13 +55,13 @@ async def _(event):
     user_bio = replied_user.about
     if user_bio is not None:
         user_bio = replied_user.about
-    await functions.account.UpdateProfileRequest(first_name=first_name)
-    await functions.account.UpdateProfileRequest(last_name=last_name)
-    await functions.account.UpdateProfileRequest(about=user_bio)
-    pfile = await event.upload_file(profile_pic)  # pylint:disable=E060
-    await functions.photos.UploadProfilePhotoRequest(pfile)  # pylint:disable=E0602
-    await event.delete()
-    await event.send_message(event.chat_id, "Cloned Successfully", reply_to=reply_message)
+    functions.account.UpdateProfileRequest(first_name=first_name)
+    functions.account.UpdateProfileRequest(last_name=last_name)
+    functions.account.UpdateProfileRequest(about=user_bio)
+    pfile = event.upload_file(profile_pic)  # pylint:disable=E060
+    functions.photos.UploadProfilePhotoRequest(pfile)  # pylint:disable=E0602
+    event.delete()
+    event.send_message(event.chat_id, "Cloned Successfully", reply_to=reply_message)
 
 #@telebot.on(admin_cmd(pattern="revert$"))
 @register(outgoing=True, pattern="^.revert$")
@@ -71,14 +71,10 @@ async def _(event):
     name = f"{DEFAULTUSER}"
     bio = f"{DEFAULTUSERBIO}"
     n = 1
-    await borg(
-        functions.photos.DeletePhotosRequest(
-            await event.client.get_profile_photos("me", limit=n)
-        )
-    )
-    await functions.account.UpdateProfileRequest(about=bio)
-    await functions.account.UpdateProfileRequest(first_name=name)
-    await event.edit("succesfully reverted to your account back")
+    functions.photos.DeletePhotosRequest(event.client.get_profile_photos("me", limit=n))
+    functions.account.UpdateProfileRequest(about=bio)
+    functions.account.UpdateProfileRequest(first_name=name)
+    event.edit("succesfully reverted to your account back")
 
 
 async def get_full_user(event):
