@@ -65,7 +65,12 @@ async def _(event):
     bio = f"{DEFAULTUSERBIO}"
     n = 1
     await event.edit("`Processing...`")
-    await event.client(DeletePhotosRequest(event.client.get_profile_photos("me", limit=n)))
+    pfplist = await event.client(GetUserPhotosRequest(user_id=event.from_id,offset=0,max_id=0,limit=n))
+    input_photos = []
+    for sep in pfplist.photos:
+        input_photos.append(InputPhoto(id=sep.id,access_hash=sep.access_hash,file_reference=sep.file_reference))
+    await event.client(DeletePhotosRequest(id=input_photos))
+    #await event.client(DeletePhotosRequest(event.client.get_profile_photos("me", limit=n)))
     await event.client(UpdateProfileRequest(first_name=name))
     await event.client(UpdateProfileRequest(about=bio))
     #functions.photos.DeletePhotosRequest(event.client.get_profile_photos("me", limit=n))
