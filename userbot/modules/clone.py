@@ -58,10 +58,10 @@ async def _(event):
     await functions.account.UpdateProfileRequest(first_name=first_name)
     await functions.account.UpdateProfileRequest(last_name=last_name)
     await functions.account.UpdateProfileRequest(about=user_bio)
-    pfile = await borg.upload_file(profile_pic)  # pylint:disable=E060
+    pfile = await event.upload_file(profile_pic)  # pylint:disable=E060
     await functions.photos.UploadProfilePhotoRequest(pfile)  # pylint:disable=E0602
     await event.delete()
-    await borg.send_message(event.chat_id, "Cloned Successfully", reply_to=reply_message)
+    await event.send_message(event.chat_id, "Cloned Successfully", reply_to=reply_message)
 
 #@telebot.on(admin_cmd(pattern="revert$"))
 @register(outgoing=True, pattern="^.revert$")
@@ -76,8 +76,8 @@ async def _(event):
             await event.client.get_profile_photos("me", limit=n)
         )
     )
-    await borg(functions.account.UpdateProfileRequest(about=bio))
-    await borg(functions.account.UpdateProfileRequest(first_name=name))
+    await functions.account.UpdateProfileRequest(about=bio)
+    await functions.account.UpdateProfileRequest(first_name=name)
     await event.edit("succesfully reverted to your account back")
 
 
