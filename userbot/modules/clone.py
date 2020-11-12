@@ -65,8 +65,8 @@ async def _(event):
     bio = f"{DEFAULTUSERBIO}"
     n = 1
     await event.edit("`Processing...`")
-    await event.client(DeletePhotosRequest(event.client.get_profile_photos("me", limit=n))
-    await event.client(UpdateProfileRequest(first_name=name)
+    await event.client(DeletePhotosRequest(event.client.get_profile_photos("me", limit=n)))
+    await event.client(UpdateProfileRequest(first_name=name))
     await event.client(UpdateProfileRequest(about=bio))
     #functions.photos.DeletePhotosRequest(event.client.get_profile_photos("me", limit=n))
     #functions.account.UpdateProfileRequest(about=bio)
