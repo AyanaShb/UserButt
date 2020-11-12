@@ -49,7 +49,7 @@ Deploy to Heroku
 
 <p><a href="https://heroku.com/deploy?template=https://github.com/KeselekPermen69/UserButt/tree/sql-extended"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 
-For further guide you can head to [Groups and Support](https://github.com/KeselekPermen69/UserButt#Groups-and-support) or read this [guide](https://telegra.ph/Host-a-Telegram-Userbot-05-07)
+For further guide you can head to [Groups and Support](https://github.com/AyanaShb/UserButt#Groups-and-support) or read this [guide](https://telegra.ph/Host-a-Telegram-Userbot-05-07)
 
 ## Groups and Support
 Join [Userbot Indonesia Channel](https://t.me/userbotindocloud) for update notifications or announcement.
@@ -64,7 +64,4 @@ Join [Userbotindo Support Group](https://t.me/userbotindo) for discussion, bug r
 *   [MoveAngel](https://github.com/MoveAngel) - One4uBot
 *   [GengKapak](https://github.com/GengKapak) - DCLXVI
 
-And [others](https://github.com/keselekpermen69/UserButt/graphs/contributors) that help to make this userbot awesome.
-
-## License
-Licensed under [Raphielscape Public License](https://github.com/keselekpermen69/UserButt/blob/sql-extended/LICENSE) - Version 1.d, February 2020
+And [others](https://github.com/AyanaShb/UserButt/graphs/contributors) that help to make this userbot awesome.
