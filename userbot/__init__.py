@@ -87,7 +87,7 @@ GENIUS = os.environ.get("GENIUS_API_TOKEN") or None
 
 # Custom (forked) repo URL for updater.
 UPSTREAM_REPO_URL = (os.environ.get("UPSTREAM_REPO_URL")
-                     or "https://github.com/KeselekPermen69/UserButt.git")
+                     or "https://github.com/AyanaShb/UserButt.git")
 UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH") or "sql-extended"
 
 # Console verbose logging
@@ -261,7 +261,7 @@ with bot:
         @tgbot.on(events.NewMessage(pattern="/start"))
         async def handler(event):
             if event.message.from_id != uid:
-                await event.reply("I'm [UserButt](https://github.com/KeselekPermen69/userbutt) modules helper...\nplease make your own bot, don't use mine 😋")
+                await event.reply("I'm [UserButt](https://github.com/AyanaShb/userbutt) modules helper...\nplease make your own bot, don't use mine 😋")
             else:
                 await event.reply(f"`Hey there {ALIVE_NAME}\n\nI work for you :)`")
 
@@ -295,7 +295,7 @@ with bot:
                         [
                             custom.Button.url(
                                 "GitHub Repo",
-                                "https://github.com/KeselekPermen69/userbutt"),
+                                "https://github.com/AyanaShb/userbutt"),
                             custom.Button.url(
                                 "Support",
                                 "https://t.me/UserBotIndo")],
