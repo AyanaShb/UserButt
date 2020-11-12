@@ -34,12 +34,11 @@ async def filter_incoming_handler(handler):
                 if pro:
                     if trigger.f_mesg_id:
                         print(str(trigger.f_mesg_id))
-                        msg_o = handler.client.get_messages(entity=BOTLOG_CHATID, ids=int(trigger.f_mesg_id))
+                        msg_o = await handler.client.get_messages(entity=BOTLOG_CHATID, ids=int(trigger.f_mesg_id))
                         await handler.reply(msg_o.message, file=msg_o.media)
-                        break
                     elif trigger.reply:
                         await handler.reply(trigger.reply)
-                        break
+                break
     except AttributeError:
         pass
 
