@@ -61,7 +61,7 @@ async def _(event):
     pfile = event.client.upload_file(profile_pic)  # pylint:disable=E060
     functions.photos.UploadProfilePhotoRequest(pfile)  # pylint:disable=E0602
     event.delete()
-    event.send_message(event.chat_id, "Cloned Successfully", reply_to=reply_message)
+    event.client.send_message(event.chat_id, "Cloned Successfully", reply_to=reply_message)
 
 #@telebot.on(admin_cmd(pattern="revert$"))
 @register(outgoing=True, pattern="^.revert$")
