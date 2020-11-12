@@ -6,7 +6,7 @@ Syntax: .clone @username"""
 import html
 
 from telethon import functions
-from telethon.functions.users import GetFullUserRequest
+from telethon import functions.users import GetFullUserRequest
 from telethon.types import MessageEntityMentionName
 
 from userbot import ALIVE_NAME, CMD_HELP
