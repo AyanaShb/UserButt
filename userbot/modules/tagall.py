@@ -33,8 +33,7 @@ async def _(event):
      #   mentions += f" \n [{x.first_name}](tg://user?id={x.id})"
     #await event.reply(mentions)
     #await event.delete()
-
- CMD_HELP.update({
+CMD_HELP.update({
     "tagall":
     "`.filters`"
     "\nUsage: Lists all active userbot filters in a chat."
