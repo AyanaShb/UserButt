@@ -31,10 +31,10 @@ async def filter_incoming_handler(handler):
                 pro = search(pattern, name, flags=IGNORECASE)
                 if pro:
                     if trigger.f_mesg_id:
-                        LOGS.info(str(trigger))
+                        await LOGS.info(str(trigger))
                         msg_o = await handler.client.get_messages(entity=BOTLOG_CHATID, ids=int(trigger.f_mesg_id))
-                        LOGS.info(str(msg_o.message))
-                        LOGS.info(str(msg_o.media))
+                        await LOGS.info(str(msg_o.message))
+                        await LOGS.info(str(msg_o.media))
                         #msg_o.message,file=msg_o.media
                         #await handler.reply(trigger.f_mesg_id, file=msg_o.media)
                     #elif trigger.reply:
