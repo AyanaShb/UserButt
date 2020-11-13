@@ -1,6 +1,6 @@
 from telethon.tl.types import ChannelParticipantsAdmins
 from userbot.events import register
-from userbot import CMD_HELP
+from userbot import CMD_HELP, bot
 
 @register(outgoing=True, pattern="^.tagadmin$")
 async def _(event):
@@ -8,7 +8,7 @@ async def _(event):
         return
     mentions = "Administrators in the chat : "
     chat = await event.get_input_chat()
-    async for x in event.iter_participants(chat, filter=ChannelParticipantsAdmins):
+    async for x in bot.iter_participants(chat, filter=ChannelParticipantsAdmins):
         mentions += f" \n [{x.first_name}](tg://user?id={x.id})"
     reply_message = None
     if event.reply_to_msg_id:
