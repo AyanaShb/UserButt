@@ -7,7 +7,7 @@
 
 from asyncio import sleep
 from re import search, IGNORECASE, escape
-from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, LOGS
+from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from userbot.events import register
 
 
@@ -31,12 +31,10 @@ async def filter_incoming_handler(handler):
                 pro = search(pattern, name, flags=IGNORECASE)
                 if pro:
                     if trigger.f_mesg_id:
-                        await LOGS.info(str(trigger))
                         msg_o = await handler.client.get_messages(entity=BOTLOG_CHATID, ids=int(trigger.f_mesg_id))
-                        await LOGS.info(str(msg_o.message))
-                        await LOGS.info(str(msg_o.media))
                         #msg_o.message,file=msg_o.media
-                        await handler.reply(trigger.f_mesg_id, file=msg_o.media)
+                        await handler.reply(trigger.reply, file=msg_o.media)
+                        await handler.reply(trigger.reply,"ok")
                     #elif trigger.reply:
                         #await handler.reply(trigger.reply)
     except AttributeError:
