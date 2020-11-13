@@ -32,7 +32,9 @@ async def filter_incoming_handler(handler):
                 if pro:
                     if trigger.f_mesg_id:
                         LOGS.info(str(trigger))
-                        #msg_o = await handler.client.get_messages(entity=BOTLOG_CHATID, ids=int(trigger.f_mesg_id))
+                        msg_o = await handler.client.get_messages(entity=BOTLOG_CHATID, ids=int(trigger.f_mesg_id))
+                        LOGS.info(str(msg_o.message))
+                        LOGS.info(str(msg_o.media))
                         #msg_o.message,file=msg_o.media
                         #await handler.reply(trigger.f_mesg_id, file=msg_o.media)
                     #elif trigger.reply:
