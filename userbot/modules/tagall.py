@@ -25,10 +25,17 @@ async def _(event):
         return
     mentions = "Hey there!"
     chat = await event.get_input_chat()
+    parsed_len = len(chat)//100+1
+    no = 0
+    basechat = []#tampung data member
     async for x in bot.iter_participants(chat, 200000):
-        mentions += f" \n [{x.first_name}](tg://user?id={x.id})"
-    await event.reply(mentions)
-    await event.delete()
+        basechat.append(x)
+    for point in range(parsed_len):
+        for mid in basechat[point*100:(point+1)*100]:
+            mentions += no + "• " + f" \n [{mid.first_name}](tg://user?id={mid.id})"
+            no += 1
+        await event.reply(mentions)
+    #await event.delete()
     
 CMD_HELP.update({
     "tagall":
