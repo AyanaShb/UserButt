@@ -35,6 +35,7 @@ async def _(event):
             mentions += no + "• " + f" \n [{mid.first_name}](tg://user?id={mid.id})"
             no += 1
         await event.reply(mentions)
+        mentions = ""
     #await event.delete()
     
 CMD_HELP.update({
