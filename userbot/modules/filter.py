@@ -15,7 +15,7 @@ from userbot.events import register
 async def filter_incoming_handler(handler):
     """Checks if the incoming message contains handler of a filter"""
     try:
-        #if not (await handler.get_sender()).bot:
+        if not (await handler.get_sender()).bot:
             try:
                 from userbot.modules.sql_helper.filter_sql import get_filters
             except AttributeError:
@@ -36,7 +36,7 @@ async def filter_incoming_handler(handler):
                         await LOGS.info(str(msg_o.message))
                         await LOGS.info(str(msg_o.media))
                         #msg_o.message,file=msg_o.media
-                        #await handler.reply(trigger.f_mesg_id, file=msg_o.media)
+                        await handler.reply(trigger.f_mesg_id, file=msg_o.media)
                     #elif trigger.reply:
                         #await handler.reply(trigger.reply)
     except AttributeError:
