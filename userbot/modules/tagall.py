@@ -32,7 +32,7 @@ async def _(event):
     parsed_len = len(basechat)//100+1
     for point in range(parsed_len):
         for mid in basechat[point*100:(point+1)*100]:
-            mentions += no + "• " + f" \n [{mid.first_name}](tg://user?id={mid.id})"
+            mentions += str(no) + "• " + f" \n [{mid.first_name}](tg://user?id={mid.id})"
             no += 1
         await event.reply(mentions)
         mentions = ""
