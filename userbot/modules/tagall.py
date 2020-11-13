@@ -1,6 +1,7 @@
 from telethon.tl.types import ChannelParticipantsAdmins
 from userbot.events import register
 from userbot import CMD_HELP, bot
+from asyncio import sleep
 
 @register(outgoing=True, pattern="^.tagadmin$")
 async def _(event):
@@ -23,7 +24,7 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    mentions = "Hey there!"
+    mentions = "Hey there!\n"
     chat = await event.get_input_chat()
     no = 0
     basechat = []#tampung data member
@@ -32,10 +33,11 @@ async def _(event):
     parsed_len = len(basechat)//100+1
     for point in range(parsed_len):
         for mid in basechat[point*100:(point+1)*100]:
-            mentions += str(no) + "• " + f" \n [{mid.first_name}](tg://user?id={mid.id})"
+            mentions +=  f" \n [{mid.first_name}](tg://user?id={mid.id})" + str(no) + "• "
             no += 1
         await event.reply(mentions)
         mentions = ""
+        await sleep(3)
     #await event.delete()
     
 CMD_HELP.update({
