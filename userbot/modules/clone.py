@@ -119,9 +119,9 @@ async def get_full_user(event):
 
 
 CMD_HELP.update({
-     "clone": ".clone <reply/@>.\
-    \n**Usage: clone the replied user account.\
-    \n\n.revert\
-    \nUse - Reverts back to your profile which you have set in heroku.\
-    "
+    "clone":
+    "`.clone`"
+    "\nUsage: `.clone` <@username> or reply to a message with .clone"
+    "\n\n`.revert`"
+    "\nUsage: Reverts back to your profile which you have set in heroku."
 })
