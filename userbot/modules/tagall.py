@@ -16,7 +16,7 @@ async def _(event):
         await reply_message.reply(mentions)
     else:
         await event.reply(mentions)
-    #await event.delete()
+    await event.delete()
 
 
 @register(outgoing=True, pattern="^.tagall$")
@@ -35,7 +35,7 @@ async def _(event):
             mentions += no + "• " + f" \n [{mid.first_name}](tg://user?id={mid.id})"
             no += 1
         await event.reply(mentions)
-    #await event.delete()
+    await event.delete()
     
 CMD_HELP.update({
     "tagall":
