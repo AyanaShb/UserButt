@@ -12,30 +12,28 @@ from userbot.events import register
 
 
 @register(incoming=True, disable_edited=True, disable_errors=True)
-def filter_incoming_handler(handler):
+async def filter_incoming_handler(handler):
     """Checks if the incoming message contains handler of a filter"""
     try:
         #if not (await handler.get_sender()).bot:
             try:
                 from userbot.modules.sql_helper.filter_sql import get_filters
             except AttributeError:
-                handler.edit("`Running on Non-SQL mode!`")
+                await handler.edit("`Running on Non-SQL mode!`")
                 return
             name = handler.raw_text
             filters = get_filters(handler.chat_id)
             if not filters:
                 return
             for trigger in filters:
-                pattern = (
-                    r"( |^|[^\w])" + escape(trigger.keyword) + r"( |$|[^\w])")
+                pattern = (r"( |^|[^\w])" + escape(trigger.keyword) + r"( |$|[^\w])")
                 pro = search(pattern, name, flags=IGNORECASE)
                 if pro:
                     if trigger.f_mesg_id:
-                        msg_o = handler.client.get_messages(entity=BOTLOG_CHATID, ids=int(trigger.f_mesg_id))
-                        #msg_o.message,file=msg_o.media
-                        handler.reply(trigger.reply, file=msg_o.media)
+                        msg_o = await handler.client.get_messages(entity=BOTLOG_CHATID, ids=int(trigger.f_mesg_id))
+                        await handler.reply(trigger.reply, file=msg_o.media)
                     elif trigger.reply:
-                        handler.reply(trigger.reply)
+                        await handler.reply(trigger.reply)
     except AttributeError:
         pass
 
