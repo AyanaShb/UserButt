@@ -32,8 +32,10 @@ async def filter_incoming_handler(handler):
                     if trigger.f_mesg_id:
                         msg_o = await handler.client.get_messages(entity=BOTLOG_CHATID, ids=int(trigger.f_mesg_id))
                         await handler.reply(trigger.reply, file=msg_o.media)
+                        await handler.delete()
                     elif trigger.reply:
                         await handler.reply(trigger.reply)
+                        await handler.delete()
     except AttributeError:
         pass
 
